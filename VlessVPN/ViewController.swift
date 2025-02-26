@@ -7,13 +7,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+    
+    // MARK: - Private properties
+    
+    private let mainView = MainView()
+
+    // MARK: - Private methods
+    
+    override func loadView() {
+        view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        mainView.connectButton.addTarget(self, action: #selector(connectToVPN), for: .touchUpInside)
     }
 
-
+    // MARK: - Private methods
+    
+    @objc private func connectToVPN() {
+        VPNManager.shared.startVPN()
+    }
 }
-
